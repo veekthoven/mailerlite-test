@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Enums\State;
 use App\Models\Subscriber;
-use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreSubscriberRequest;
 use App\Http\Requests\UpdateSubscriberRequest;
+use App\Http\Resources\SubscriberResource;
+use Illuminate\Http\Request;
 
 class SubscriberController extends Controller
 {
@@ -15,11 +16,24 @@ class SubscriberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $limit = $request->limit ?? 100;
+        $offset = $request->offset ?? 0;
+
+        $query = Subscriber::query();
+
+        if ($request->state) {
+            $query->whereState($request->state);
+        }
+
+        $subscribers = $query->offset($offset)
+                            ->limit($limit)
+                            ->get();
+
         return response()->json([
             "message" => "Subscribers Successfully retrieved.",
-            "subscribers" => [] // a collection of subscriber resources
+            "subscribers" => SubscriberResource::collection($subscribers)
         ]);
     }
 
@@ -37,13 +51,13 @@ class SubscriberController extends Controller
             "state" => State::Active->value
         ]);
 
-        $subscriber->field()->create([
-            'value' => $request->field
+        $subscriber->fields()->create([
+            'value' => $request->fields
         ]);
 
         return response()->json([
             "message" => "Subscriber successfully added.",
-            "subscriber" => $subscriber // This will eventually be a subscribtion resource.
+            "subscriber" => new SubscriberResource($subscriber)
         ], 201);
     }
 
@@ -55,7 +69,10 @@ class SubscriberController extends Controller
      */
     public function show(Subscriber $subscriber)
     {
-        //
+        return response()->json([
+            "message" => "Subscriber Successfully retrieved.",
+            "subscriber" => new SubscriberResource($subscriber)
+        ], 201);
     }
 
     /**
@@ -67,7 +84,20 @@ class SubscriberController extends Controller
      */
     public function update(UpdateSubscriberRequest $request, Subscriber $subscriber)
     {
-        //
+        $subscriber->update([
+            "name" => $request->name,
+            "email" => $request->email,
+            "state" => $request->state
+        ]);
+
+        $subscriber->fields()->update([
+            'value' => $request->fields
+        ]);
+
+        return response()->json([
+            "message" => "Subscriber successfully updated.",
+            "subscriber" => new SubscriberResource($subscriber)
+        ], 201);
     }
 
     /**
@@ -78,6 +108,10 @@ class SubscriberController extends Controller
      */
     public function destroy(Subscriber $subscriber)
     {
-        //
+        $subscriber->delete();
+
+        return response()->json([
+            "message" => "Subscriber Successfully deleted.",
+        ], 200);
     }
 }

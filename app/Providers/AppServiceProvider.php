@@ -25,30 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Validator::extend('field', function ($attribute, $value, $parameters, $validator) {
-            $rules = [];
-            $values = [];
-            $messages = [];
-        
-            foreach ($value as $field) {
-                $fieldValidator = sprintf("App\FieldValidators\%sField", ucfirst($field['type']));
-
-                $rules[] = [
-                    $field['key'] => $fieldValidator::rules()
-                ];
-
-                $values[] = [
-                    $field['key'] => $field['value']
-                ];
-
-                $messages[] = [
-                    $field['key'] => $fieldValidator::message()
-                ];
-            }
-
-            $validator = Validator::make($values[0], $rules[0], $messages[0], ['company']);
-
-            return !$validator->fails();
-        });
+        //
     }
 }

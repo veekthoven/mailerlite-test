@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSubscriberRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -17,12 +18,26 @@ class StoreSubscriberRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        foreach ($this->fields as $field) {
+            $this->merge([
+                $field['key'] => $field['value'] ?? ""
+            ]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, mixed>
      */
     public function rules()
+    {
+        return $this->prepareRules();
+    }
+
+    protected function prepareRules()
     {
         $rules = [];
 
@@ -48,9 +63,4 @@ class StoreSubscriberRequest extends FormRequest
             $rules[0]
         );
     }
-
-    // public function messages()
-    // {
-    //     return $this->messages[0];
-    // }
 }

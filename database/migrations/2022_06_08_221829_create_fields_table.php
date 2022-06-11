@@ -16,6 +16,7 @@ return new class extends Migration {
         Schema::create('fields', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('key');
             $table->enum('type', [
                 Type::Date->value,
                 Type::Number->value,

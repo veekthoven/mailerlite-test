@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSubscriberRequest extends FormRequest
@@ -23,6 +24,33 @@ class StoreSubscriberRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        $rules = [];
+
+        foreach ($this->fields as $field) {
+            $fieldValidator = sprintf("App\FieldValidators\%sField", ucfirst($field['type']));
+
+            $rules[] = [
+                $field['key'] => $fieldValidator::rules()
+            ];
+        }
+
+        return array_merge(
+            [
+                'email' => [
+                    'required',
+                    'email'
+                ],
+                'name' => [
+                    'required',
+                    'string'
+                ]
+            ],
+            $rules[0]
+        );
     }
+
+    // public function messages()
+    // {
+    //     return $this->messages[0];
+    // }
 }

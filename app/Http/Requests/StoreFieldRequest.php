@@ -27,4 +27,11 @@ class StoreFieldRequest extends FormRequest
             //
         ];
     }
+
+    public function messages()
+    {
+        return [
+            //
+        ];
+    }
 }

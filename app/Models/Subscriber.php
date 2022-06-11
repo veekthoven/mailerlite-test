@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Subscriber extends Model
 {
     use HasFactory;
 
-    public function fields()
+    protected $guarded = [];
+
+    public function fields() : Relation
     {
-        // returns a relationship with SubscriberField Model.
+        return $this->hasOne(SubscriberField::class, 'subscriber_id');
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\State;
+use App\Models\Subscriber;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreSubscriberRequest;
 use App\Http\Requests\UpdateSubscriberRequest;
-use App\Models\Subscriber;
 
 class SubscriberController extends Controller
 {
@@ -17,7 +19,7 @@ class SubscriberController extends Controller
     {
         return response()->json([
             "message" => "Subscribers Successfully retrieved.",
-            "subscribers" =>[]
+            "subscribers" => [] // a collection of subscriber resources
         ]);
     }
 
@@ -29,7 +31,20 @@ class SubscriberController extends Controller
      */
     public function store(StoreSubscriberRequest $request)
     {
-        //
+        $subscriber = Subscriber::create([
+            "name" => $request->name,
+            "email" => $request->email,
+            "state" => State::Active->value
+        ]);
+
+        $subscriber->field()->create([
+            'value' => $request->field
+        ]);
+
+        return response()->json([
+            "message" => "Subscriber successfully added.",
+            "subscriber" => $subscriber // This will eventually be a subscribtion resource.
+        ], 201);
     }
 
     /**

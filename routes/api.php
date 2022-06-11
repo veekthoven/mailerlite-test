@@ -10,3 +10,4 @@ Route::get('/', function () {
 });
 
 Route::resource('subscribers', SubscriberController::class);
+Route::resource('fields', FieldController::class);

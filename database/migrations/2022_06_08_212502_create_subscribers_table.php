@@ -15,9 +15,9 @@ return new class extends Migration {
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('name');
-            $table->enum('status', [
+            $table->enum('state', [
                 State::Active->value,
                 State::Bounced->value,
                 State::Unconfirmed->value,

@@ -12,6 +12,8 @@ class Subscriber extends Model
 
     protected $guarded = [];
 
+    protected $with = ['fields'];
+
     public function fields() : Relation
     {
         return $this->hasOne(SubscriberField::class, 'subscriber_id');

@@ -16,7 +16,9 @@ return new class extends Migration {
     {
         Schema::create('subscriber_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Subscriber::class);
+            $table->foreignIdFor(Subscriber::class)
+                    ->constrained()
+                    ->onDelete('cascade');
             $table->json('value');
             $table->timestamps();
         });

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\Type;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,12 @@ class FieldFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->unique()->word();
+
         return [
-            //
+            'title' => $title,
+            'type' => collect(array_column(Type::cases(), 'value'))->random(),
+            'key' => Str::slug($title, '_')
         ];
     }
 }

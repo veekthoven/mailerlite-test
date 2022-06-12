@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Field;
 use Illuminate\Database\Seeder;
 
 class FieldSeeder extends Seeder
@@ -14,6 +14,6 @@ class FieldSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Field::factory(10)->create();
     }
 }

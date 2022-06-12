@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Traits\ValidatesSubscriber;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSubscriberRequest extends FormRequest
 {
+    use ValidatesSubscriber;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +16,7 @@ class UpdateSubscriberRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +26,6 @@ class UpdateSubscriberRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return $this->prepareRules();
     }
 }

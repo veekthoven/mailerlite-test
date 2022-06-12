@@ -96,7 +96,7 @@ class SubscriberController extends Controller
 
         return response()->json([
             "message" => "Subscriber successfully updated.",
-            "subscriber" => new SubscriberResource($subscriber)
+            "subscriber" => new SubscriberResource($subscriber->fresh())
         ], 201);
     }
 
@@ -112,6 +112,6 @@ class SubscriberController extends Controller
 
         return response()->json([
             "message" => "Subscriber Successfully deleted.",
-        ], 200);
+        ], 204);
     }
 }

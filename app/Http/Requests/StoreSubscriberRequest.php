@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Log;
+use App\Traits\ValidatesSubscriber;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSubscriberRequest extends FormRequest
 {
+    use ValidatesSubscriber;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -18,15 +19,6 @@ class StoreSubscriberRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation(): void
-    {
-        foreach ($this->fields as $field) {
-            $this->merge([
-                $field['key'] => $field['value'] ?? ""
-            ]);
-        }
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -35,32 +27,5 @@ class StoreSubscriberRequest extends FormRequest
     public function rules()
     {
         return $this->prepareRules();
-    }
-
-    protected function prepareRules()
-    {
-        $rules = [];
-
-        foreach ($this->fields as $field) {
-            $fieldValidator = sprintf("App\FieldValidators\%sField", ucfirst($field['type']));
-
-            $rules[] = [
-                $field['key'] => $fieldValidator::rules()
-            ];
-        }
-
-        return array_merge(
-            [
-                'email' => [
-                    'required',
-                    'email'
-                ],
-                'name' => [
-                    'required',
-                    'string'
-                ]
-            ],
-            $rules[0]
-        );
     }
 }

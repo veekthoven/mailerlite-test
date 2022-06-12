@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\Type;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreFieldRequest extends FormRequest
@@ -13,7 +15,7 @@ class StoreFieldRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,16 @@ class StoreFieldRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "title" => [
+                'required',
+                'string',
+                'unique:fields,title'
+            ],
+            "type" => [
+                'required',
+                'string',
+                new Enum(Type::class)
+            ]
         ];
     }
 

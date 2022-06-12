@@ -1,7 +1,7 @@
 ## How to set up project on a local environment
 I used [sail](https://laravel.com/docs/9.x/sail) for my development environment. So you'd need [docker installed](https://docs.docker.com/get-docker/) on your machine to run this app.
 
-This is just the backend (API) of the whole app. The frontend (client) that consumes this API is in this repo: [http://link-to-the-repo.com](http://link-to-the-repo.com).
+This is just the backend (API) of the whole app. The frontend (client) that consumes this API is in this repo: [https://github.com/veekthoven/mailerlite-client](https://github.com/veekthoven/mailerlite-client).
 
 - Clone repo.
 - run `composer install`.
@@ -103,4 +103,4 @@ Below are the endpoints this API exposes.
 5. `DELETE /fields/{id}` - This deleted the field with the provided ID
 
 ## NOTE
-The client for this API is in a seperate repo, you can access here: [http://link-to-the-repo.com](http://link-to-the-repo.com)
+The client for this API is in a seperate repo, you can access here: [https://github.com/veekthoven/mailerlite-client](https://github.com/veekthoven/mailerlite-client)

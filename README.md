@@ -1,5 +1,5 @@
 ## How to set up project on a local environment
-I used [sail](https://laravel.com/docs/9.x/sail) for my development environment. So you'd need (docker installed)[https://docs.docker.com/get-docker/] on your machine to run this app.
+I used [sail](https://laravel.com/docs/9.x/sail) for my development environment. So you'd need (docker installed)[https://docs.docker.com/get-docker] on your machine to run this app.
 
 This is just the backend (API) of the whole app. The frontend (client) that consumes this API lives in [this repo](http://veekthoven.com).
 

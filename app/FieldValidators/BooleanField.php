@@ -11,9 +11,4 @@ class BooleanField
             'boolean'
         ];
     }
-
-    public static function message()
-    {
-        return 'This field must be true or false.';
-    }
 }

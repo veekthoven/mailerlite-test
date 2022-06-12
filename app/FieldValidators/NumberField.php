@@ -11,9 +11,4 @@ class NumberField
             'numeric'
         ];
     }
-
-    public static function message()
-    {
-        return 'The field must be a number.';
-    }
 }

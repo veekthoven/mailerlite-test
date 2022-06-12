@@ -11,9 +11,4 @@ class DateField
             'date'
         ];
     }
-
-    public static function message()
-    {
-        return 'The field must be a date.';
-    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FieldController;
 use App\Http\Controllers\SubscriberController;
 
 Route::get('/', function () {

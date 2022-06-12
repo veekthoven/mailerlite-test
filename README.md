@@ -1,5 +1,5 @@
 ## How to set up project on a local environment
-I used [sail](https://laravel.com/docs/9.x/sail) for my development environment. So you'd need (docker installed)[https://docs.docker.com/get-docker] on your machine to run this app.
+I used [sail](https://laravel.com/docs/9.x/sail) for my development environment. So you'd need [docker installed](https://docs.docker.com/get-docker/) on your machine to run this app.
 
 This is just the backend (API) of the whole app. The frontend (client) that consumes this API lives in [this repo](http://veekthoven.com).
 
@@ -9,7 +9,7 @@ This is just the backend (API) of the whole app. The frontend (client) that cons
 - run `vendor/bin/sail artisan key:generate`
 - run `vendor/bin/sail up -d`. Not that this command will run for quite a while the first time you run it. Don't worry, it's expected.
 - run `vendor/bin/sail artisan migrate --seed`.
-- The API can be accessed via `http://localhost:82`. If there's an app running on this port already, you might need to change it in `.env` file.
+- The API can be accessed via [http://localhost:82](http://localhost:82). If there's an app running on this port already, you might need to change it in `.env` file.
 
 Below are the endpoints this API exposes.
 

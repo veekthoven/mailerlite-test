@@ -103,4 +103,4 @@ Below are the endpoints this API exposes.
 5. `DELETE /fields/{id}` - This deleted the field with the provided ID
 
 ## NOTE
-The client for this API is in a seperate repo, you can access here: [https://github.com/veekthoven/mailerlite-client](https://github.com/veekthoven/mailerlite-client)
+The client for this API is in a seperate repo, you can access it here: [https://github.com/veekthoven/mailerlite-client](https://github.com/veekthoven/mailerlite-client)

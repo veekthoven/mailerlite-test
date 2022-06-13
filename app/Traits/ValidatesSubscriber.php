@@ -29,6 +29,7 @@ trait ValidatesSubscriber
             [
                 'email' => [
                     'required',
+                    'unique:subscribers,email',
                     'email:rfc,dns'
                 ],
                 'name' => [
